@@ -5,6 +5,22 @@ import icon from '../../resources/icon.png?asset'
 
 import connectDB from './db';
 
+
+async function authorize(event, user) {
+  const { login, password } = user;
+
+  try {
+    const response = await global.dbclient.query(`SELECT LOGIN, PASSWORD, ROLE FROM USERS`);
+    const user = response.rows.find((user) => user.login === login && user.password === password);
+    if (user) {
+      return user.role;
+    } dialog.showErrorBox('Такого пользователя нет', 'Попробуйте ввести другой логин и/или пароль')
+  } catch (e) {
+    return ('error')
+  }
+}
+
+
 async function foo(event, data) {
   try {
     console.log(data)
@@ -48,7 +64,8 @@ app.whenReady().then(async () => {
 
   global.dbclient = await connectDB();
 
-  ipcMain.handle('sendSignal', foo)
+  ipcMain.handle('sendSignal', foo),
+  ipcMain.handle('authorizeUser', authorize)
 
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)

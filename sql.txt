@@ -1,0 +1,32 @@
+    CREATE TABLE orders (
+      id SERIAL PRIMARY KEY,
+      order_number VARCHAR(100) NOT NULL,
+      article VARCHAR(100) NOT NULL,
+      order_date DATE NOT NULL,
+      delivery_date DATE,
+      pickup_address TEXT,
+      client_name VARCHAR(200),
+      pickup_code VARCHAR(50),
+      status VARCHAR(50) DEFAULT 'новый'
+    );
+
+        CREATE TABLE users (
+      id SERIAL PRIMARY KEY,
+      role VARCHAR(50) NOT NULL,
+      full_name VARCHAR(200) NOT NULL,
+      login VARCHAR(100) NOT NULL,
+      password VARCHAR(100) NOT NULL
+    );
+
+INSERT INTO orders (
+  order_number, 
+  article, 
+  order_date, 
+  delivery_date, 
+  pickup_address, 
+  client_name, 
+  pickup_code, 
+  status) 
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
+
+INSERT INTO users (role, full_name, login, password) VALUES ($1, $2, $3, $4);
