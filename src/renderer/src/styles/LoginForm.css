@@ -1,0 +1,183 @@
+/* LoginForm.css */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #FFFFFF; /* Основной белый фон */
+  padding: 20px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.login-form {
+  background-color: #7FFF00; /* Дополнительный зеленый фон */
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  border: 2px solid #000000;
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 25px;
+  object-fit: contain; /* Сохраняем пропорции логотипа */
+}
+
+h1 {
+  color: #000000;
+  margin-bottom: 15px;
+  font-size: 32px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+h4 {
+  color: #000000;
+  margin-bottom: 30px;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+h5 {
+  color: #000000;
+  margin: 25px 0 15px 0;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: italic;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+label {
+  text-align: left;
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+input {
+  padding: 12px 15px;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: 'Times New Roman', Times, serif;
+  background-color: #FFFFFF;
+  color: #000000;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  border-color: #00FA9A; /* Акцентный цвет для фокуса */
+  box-shadow: 0 0 0 2px rgba(0, 250, 154, 0.3);
+}
+
+input::placeholder {
+  color: #666666;
+  font-style: italic;
+}
+
+button[type="submit"] {
+  background-color: #00FA9A; /* Акцентный цвет для основной кнопки */
+  color: #000000;
+  padding: 14px;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+button[type="submit"]:hover {
+  background-color: #00E68A; /* Темнее на hover */
+}
+
+button[type="submit"]:active {
+  background-color: #00D47A; /* Еще темнее на active */
+}
+
+.guest-button {
+  background-color: #FFFFFF;
+  color: #000000;
+  padding: 12px 24px;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.guest-button:hover {
+  background-color: #00FA9A; /* Акцентный цвет на hover */
+  color: #000000;
+}
+
+/* Состояния для ошибок */
+.input-error {
+  border-color: #FF0000;
+}
+
+.error-message {
+  color: #FF0000;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-form {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 480px) {
+  .login-form {
+    padding: 30px 20px;
+    margin: 0 15px;
+  }
+  
+  h1 {
+    font-size: 28px;
+  }
+  
+  h4 {
+    font-size: 16px;
+  }
+  
+  .logo {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* Стиль для иконки приложения (должен быть установлен в основном процессе Electron) */
+/* window.api.setAppIcon('path/to/icon.ico'); */

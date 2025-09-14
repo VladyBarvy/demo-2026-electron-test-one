@@ -1,0 +1,119 @@
+.order-list-container {
+  padding: 20px;
+  background-color: #FFFFFF;
+  min-height: 100vh;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.order-list-container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #000000;
+}
+
+.order-list-container .header h1 {
+  color: #000000;
+  font-size: 32px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.order-list-container .user-panel {
+  text-align: right;
+  color: #000000;
+  font-size: 16px;
+}
+
+.order-list-container .user-panel button {
+  background-color: #00FA9A;
+  color: #000000;
+  padding: 8px 16px;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  font-family: 'Times New Roman', Times, serif;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.order-list-container .controls {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.order-list-container .controls input {
+  padding: 10px 15px;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: 'Times New Roman', Times, serif;
+  min-width: 300px;
+}
+
+.order-list-container .controls select {
+  padding: 10px 15px;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 14px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+
+.order-list-container .controls button {
+  padding: 10px 15px;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 16px;
+  background-color: #00FA9A;
+  cursor: pointer;
+}
+
+.orders-table {
+  background-color: #7FFF00;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.orders-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #000000;
+}
+
+.orders-table th {
+  background-color: #00FA9A;
+  font-weight: bold;
+}
+
+.orders-table tr:hover {
+  background-color: #00FA9A;
+}
+
+.status-новый {
+  color: #0000FF;
+  font-weight: bold;
+}
+
+.status-в обработке {
+  color: #FFA500;
+  font-weight: bold;
+}
+
+.status-доставлен {
+  color: #008000;
+  font-weight: bold;
+}

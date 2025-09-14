@@ -1,0 +1,64 @@
+.manager-panel {
+  background-color: #FFFFFF;
+  min-height: 100vh;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #7FFF00;
+  border-bottom: 2px solid #000000;
+}
+
+.manager-header h1 {
+  color: #000000;
+  font-size: 32px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.manager-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.manager-controls button {
+  background-color: #00FA9A;
+  color: #000000;
+  padding: 8px 16px;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  font-family: 'Times New Roman', Times, serif;
+  cursor: pointer;
+}
+
+.manager-tabs {
+  display: flex;
+  background-color: #7FFF00;
+  padding: 0 20px;
+  border-bottom: 2px solid #000000;
+}
+
+.manager-tabs button {
+  padding: 15px 25px;
+  border: none;
+  background: none;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 16px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+}
+
+.manager-tabs button.active {
+  background-color: #00FA9A;
+  border-bottom-color: #000000;
+  font-weight: bold;
+}
+
+.manager-content {
+  padding: 20px;
+}

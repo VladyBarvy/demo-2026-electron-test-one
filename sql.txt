@@ -1,32 +1,79 @@
+
+    CREATE TABLE pickup_points (
+      id SERIAL PRIMARY KEY,
+      address TEXT NOT NULL UNIQUE
+    );
+
+
+
+    CREATE TABLE users (
+      id SERIAL PRIMARY KEY,
+      role VARCHAR(50) NOT NULL,
+      full_name VARCHAR(200) NOT NULL UNIQUE,
+      login VARCHAR(100) NOT NULL,
+      password VARCHAR(100) NOT NULL
+    );
+
+
     CREATE TABLE orders (
       id SERIAL PRIMARY KEY,
       order_number VARCHAR(100) NOT NULL,
       article VARCHAR(100) NOT NULL,
       order_date DATE NOT NULL,
       delivery_date DATE,
-      pickup_address TEXT,
+      pickup_address_id INTEGER REFERENCES pickup_points(id),
+      client_id INTEGER REFERENCES users(id),
       client_name VARCHAR(200),
       pickup_code VARCHAR(50),
       status VARCHAR(50) DEFAULT 'новый'
     );
 
-        CREATE TABLE users (
+
+
+    CREATE TABLE goods (
       id SERIAL PRIMARY KEY,
-      role VARCHAR(50) NOT NULL,
-      full_name VARCHAR(200) NOT NULL,
-      login VARCHAR(100) NOT NULL,
-      password VARCHAR(100) NOT NULL
+      article VARCHAR(100) NOT NULL UNIQUE,
+      name VARCHAR(200) NOT NULL,
+      unit VARCHAR(50) DEFAULT 'шт.',
+      price NUMERIC NOT NULL,
+      supplier VARCHAR(200),
+      manufacturer VARCHAR(200),
+      category VARCHAR(100),
+      discount NUMERIC DEFAULT 0,
+      stock_quantity INTEGER DEFAULT 0,
+      description TEXT,
+      photo_url TEXT
     );
 
-INSERT INTO orders (
-  order_number, 
-  article, 
-  order_date, 
-  delivery_date, 
-  pickup_address, 
-  client_name, 
-  pickup_code, 
-  status) 
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
+    
+    INSERT INTO users (role, full_name, login, password) VALUES ($1, $2, $3, $4);
 
-INSERT INTO users (role, full_name, login, password) VALUES ($1, $2, $3, $4);
+    INSERT INTO pickup_points (address) VALUES ($1);
+
+    INSERT INTO orders (
+            order_number, 
+            article, 
+            order_date, 
+            delivery_date, 
+            pickup_address_id, 
+            client_id,
+            client_name, 
+            pickup_code, 
+            status
+          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
+
+
+  INSERT INTO goods (
+            article, 
+            name, 
+            unit, 
+            price, 
+            supplier, 
+            manufacturer, 
+            category, 
+            discount, 
+            stock_quantity, 
+            description, 
+            photo_url
+          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);
+
