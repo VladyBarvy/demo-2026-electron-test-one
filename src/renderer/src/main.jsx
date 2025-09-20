@@ -94,17 +94,40 @@
 
 
 
+// import './assets/main.css'
+// import { StrictMode } from 'react'
+// import { Routes, Route, HashRouter } from 'react-router'
+// import React from 'react'
+// import ReactDOM from 'react-dom/client'
+// import App from './App'
+
+// ReactDOM.createRoot(document.getElementById('root')).render(
+//   // <StrictMode>
+//     <HashRouter>
+//       <App />
+//     </HashRouter>
+//   // </StrictMode>
+// )
+
+
+
+
+
+
+
+
+
+
+
 import './assets/main.css'
-import { StrictMode } from 'react'
-import { Routes, Route, HashRouter } from 'react-router'
-import React from 'react'
+
+import { StrictMode, createContext, useContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
+import LoginForm from './LoginForm'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <StrictMode>
-    <HashRouter>
+  <StrictMode>
       <App />
-    </HashRouter>
-  // </StrictMode>
+  </StrictMode>
 )

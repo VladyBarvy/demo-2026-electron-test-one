@@ -1,3 +1,127 @@
+import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
+import { join } from 'path'
+import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import icon from '../../resources/icon.png?asset'
+
+import connectDB from './db';
+
+async function authorize(event, user) {
+  const { login, password } = user;
+
+  try {
+    const response = await global.dbclient.query(`SELECT LOGIN, FULLNAME, PASSWORD, ROLE FROM EMPLOYEES`);
+    const user = response.rows.find((user) => user.login === login && user.password === password);
+    if (user) {
+      return { role: user.role, name: user.fullname };
+    } dialog.showErrorBox('Такого пользователя нет', 'Попробуйте ввести другой логин и/или пароль')
+  } catch (e) {
+    return ('error')
+  }
+}
+async function getGoods(event) {
+  try {
+    const response = await global.dbclient.query(`SELECT * from goods`);
+    return response.rows;
+  } catch (e) {
+    return ('error')
+  }
+}
+
+function createWindow() {
+  const mainWindow = new BrowserWindow({
+    width: 900,
+    height: 670,
+    show: false,
+    autoHideMenuBar: true,
+    ...(process.platform === 'linux' ? { icon } : {}),
+    webPreferences: {
+      preload: join(__dirname, '../preload/index.js'),
+      sandbox: false
+    }
+  })
+
+  mainWindow.on('ready-to-show', () => {
+    mainWindow.show()
+  })
+
+  mainWindow.webContents.setWindowOpenHandler((details) => {
+    shell.openExternal(details.url)
+    return { action: 'deny' }
+  })
+
+  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+  } else {
+    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+  }
+}
+
+app.whenReady().then(async () => {
+  electronApp.setAppUserModelId('com.electron')
+
+  global.dbclient = await connectDB();
+
+  ipcMain.handle('authorizeUser', authorize)
+  ipcMain.handle('getGoods', getGoods)
+
+  app.on('browser-window-created', (_, window) => {
+    optimizer.watchWindowShortcuts(window)
+  })
+
+  createWindow()
+
+  app.on('activate', function () {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  })
+})
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
 // import { join } from 'path'
 // import { electronApp, optimizer, is } from '@electron-toolkit/utils'
@@ -174,134 +298,134 @@
 //   }
 // })
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+// import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
+// import { join } from 'path'
+// import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+// import { initDatabase, dbAPI } from './db'
 
-import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
-import { join } from 'path'
-import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import { initDatabase, dbAPI } from './db'
+// let db = null;
 
-let db = null;
+// function createWindow() {
+//   const mainWindow = new BrowserWindow({
+//     width: 900,
+//     height: 670,
+//     show: false,
+//     autoHideMenuBar: true,
+//     webPreferences: {
+//       preload: join(__dirname, '../preload/index.js'),
+//       sandbox: false,
+//       nodeIntegration: false,
+//       contextIsolation: true
+//     }
+//   })
 
-function createWindow() {
-  const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
-    show: false,
-    autoHideMenuBar: true,
-    webPreferences: {
-      preload: join(__dirname, '../preload/index.js'),
-      sandbox: false,
-      nodeIntegration: false,
-      contextIsolation: true
-    }
-  })
+//   mainWindow.on('ready-to-show', () => {
+//     mainWindow.show()
+//   })
 
-  mainWindow.on('ready-to-show', () => {
-    mainWindow.show()
-  })
+//   mainWindow.webContents.setWindowOpenHandler((details) => {
+//     shell.openExternal(details.url)
+//     return { action: 'deny' }
+//   })
 
-  mainWindow.webContents.setWindowOpenHandler((details) => {
-    shell.openExternal(details.url)
-    return { action: 'deny' }
-  })
+//   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+//     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+//   } else {
+//     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+//   }
+// }
 
-  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
-  } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
-  }
-}
-
-// Обработчики IPC
-async function handleGetProducts() {
-  try {
-    console.log('Получение товаров из базы данных...');
-    if (!db) {
-      throw new Error('База данных не инициализирована');
-    }
+// // Обработчики IPC
+// async function handleGetProducts() {
+//   try {
+//     console.log('Получение товаров из базы данных...');
+//     if (!db) {
+//       throw new Error('База данных не инициализирована');
+//     }
     
-    const products = dbAPI.getProducts(db);
-    console.log('Товары получены:', products.length, 'шт.');
-    return products;
-  } catch (error) {
-    console.error('Ошибка получения товаров:', error);
-    return [];
-  }
-}
+//     const products = dbAPI.getProducts(db);
+//     console.log('Товары получены:', products.length, 'шт.');
+//     return products;
+//   } catch (error) {
+//     console.error('Ошибка получения товаров:', error);
+//     return [];
+//   }
+// }
 
-async function handleGetOrders() {
-  try {
-    if (!db) {
-      throw new Error('База данных не инициализирована');
-    }
+// async function handleGetOrders() {
+//   try {
+//     if (!db) {
+//       throw new Error('База данных не инициализирована');
+//     }
     
-    return dbAPI.getOrders(db);
-  } catch (error) {
-    console.error('Ошибка получения заказов:', error);
-    return [];
-  }
-}
+//     return dbAPI.getOrders(db);
+//   } catch (error) {
+//     console.error('Ошибка получения заказов:', error);
+//     return [];
+//   }
+// }
 
-async function handleAuthorizeUser(event, userData) {
-  try {
-    if (!db) {
-      throw new Error('База данных не инициализирована');
-    }
+// async function handleAuthorizeUser(event, userData) {
+//   try {
+//     if (!db) {
+//       throw new Error('База данных не инициализирована');
+//     }
     
-    const user = dbAPI.authorizeUser(db, userData.login, userData.password);
+//     const user = dbAPI.authorizeUser(db, userData.login, userData.password);
     
-    if (user) {
-      return user;
-    } else {
-      dialog.showErrorBox('Ошибка авторизации', 'Неверный логин или пароль');
-      return null;
-    }
-  } catch (error) {
-    console.error('Ошибка авторизации:', error);
-    dialog.showErrorBox('Ошибка', 'Произошла ошибка при авторизации');
-    return null;
-  }
-}
+//     if (user) {
+//       return user;
+//     } else {
+//       dialog.showErrorBox('Ошибка авторизации', 'Неверный логин или пароль');
+//       return null;
+//     }
+//   } catch (error) {
+//     console.error('Ошибка авторизации:', error);
+//     dialog.showErrorBox('Ошибка', 'Произошла ошибка при авторизации');
+//     return null;
+//   }
+// }
 
-app.whenReady().then(() => {
-  electronApp.setAppUserModelId('com.electron')
+// app.whenReady().then(() => {
+//   electronApp.setAppUserModelId('com.electron')
 
-  // Инициализируем базу данных
-  try {
-    db = initDatabase();
-    console.log('База данных успешно инициализирована');
-  } catch (error) {
-    console.error('Ошибка инициализации базы данных:', error);
-    dialog.showErrorBox('Ошибка', 'Не удалось инициализировать базу данных');
-  }
+//   // Инициализируем базу данных
+//   try {
+//     db = initDatabase();
+//     console.log('База данных успешно инициализирована');
+//   } catch (error) {
+//     console.error('Ошибка инициализации базы данных:', error);
+//     dialog.showErrorBox('Ошибка', 'Не удалось инициализировать базу данных');
+//   }
 
-  // Регистрируем обработчики IPC
-  ipcMain.handle('getProducts', handleGetProducts);
-  ipcMain.handle('getOrders', handleGetOrders);
-  ipcMain.handle('authorizeUser', handleAuthorizeUser);
+//   // Регистрируем обработчики IPC
+//   ipcMain.handle('getProducts', handleGetProducts);
+//   ipcMain.handle('getOrders', handleGetOrders);
+//   ipcMain.handle('authorizeUser', handleAuthorizeUser);
 
 
 
-  ipcMain.handle('ping', () => {
-    return 'pong';
-  });
+//   ipcMain.handle('ping', () => {
+//     return 'pong';
+//   });
   
 
-  app.on('browser-window-created', (_, window) => {
-    optimizer.watchWindowShortcuts(window)
-  })
+//   app.on('browser-window-created', (_, window) => {
+//     optimizer.watchWindowShortcuts(window)
+//   })
 
-  createWindow()
+//   createWindow()
 
-  app.on('activate', function () {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
-  })
-})
+//   app.on('activate', function () {
+//     if (BrowserWindow.getAllWindows().length === 0) createWindow()
+//   })
+// })
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
+// app.on('window-all-closed', () => {
+//   if (process.platform !== 'darwin') {
+//     app.quit()
+//   }
+// })

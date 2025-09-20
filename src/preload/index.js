@@ -1,3 +1,54 @@
+import { contextBridge, ipcRenderer } from 'electron'
+import { electronAPI } from '@electron-toolkit/preload'
+
+const api = {
+  autorizeUser: (user) => ipcRenderer.invoke('authorizeUser', user),
+  getGoods: () => ipcRenderer.invoke('getGoods')
+}
+
+if (process.contextIsolated) {
+  try {
+    contextBridge.exposeInMainWorld('electron', electronAPI)
+    contextBridge.exposeInMainWorld('api', api)
+  } catch (error) {
+    console.error(error)
+  }
+} else {
+  window.electron = electronAPI
+  window.api = api
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import { contextBridge, ipcRenderer } from 'electron'
 // import { electronAPI } from '@electron-toolkit/preload'
 
@@ -31,15 +82,15 @@
 // }
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// const { contextBridge, ipcRenderer } = require('electron');
 
-const { contextBridge, ipcRenderer } = require('electron');
-
-contextBridge.exposeInMainWorld('api', {
-  authorizeUser: (userData) => ipcRenderer.invoke('authorizeUser', userData),
-  getProducts: () => ipcRenderer.invoke('getProducts'),
-  getOrders: () => ipcRenderer.invoke('getOrders'),
+// contextBridge.exposeInMainWorld('api', {
+//   authorizeUser: (userData) => ipcRenderer.invoke('authorizeUser', userData),
+//   getProducts: () => ipcRenderer.invoke('getProducts'),
+//   getOrders: () => ipcRenderer.invoke('getOrders'),
   
-  // Добавим отладочные функции
-  ping: () => ipcRenderer.invoke('ping'),
-});
+//   // Добавим отладочные функции
+//   ping: () => ipcRenderer.invoke('ping'),
+// });

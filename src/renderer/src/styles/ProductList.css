@@ -274,3 +274,29 @@
     min-width: 140px;
   }
 }
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 25px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.products-grid.loading {
+  opacity: 0.5;
+}
+
+.product-row {
+  background-color: #7FFF00;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+}
+
+.product-row:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
