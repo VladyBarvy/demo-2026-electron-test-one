@@ -241,7 +241,6 @@ function LoginForm({ setUser }) {
 
   return (
     <>
-      <h1>Приветствие!</h1>
       <h4>Введите логин и пароль, чтобы войти</h4>
       <form onSubmit={(e) => submitHandler(e)}>
         <label htmlFor="login">Логин:</label>

@@ -5,177 +5,262 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #FFFFFF; /* Основной белый фон */
+  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
   padding: 20px;
   font-family: 'Times New Roman', Times, serif;
 }
 
 .login-form {
-  background-color: #7FFF00; /* Дополнительный зеленый фон */
-  padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #7FFF00;
+  padding: 50px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 450px;
+  max-width: 480px;
   text-align: center;
-  border: 2px solid #000000;
+  border: 3px solid #000000;
+  position: relative;
+}
+
+.login-form::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border: 2px solid #00FA9A;
+  border-radius: 15px;
+  z-index: -1;
+  opacity: 0.7;
 }
 
 .logo {
-  width: 120px;
-  height: 120px;
-  margin-bottom: 25px;
-  object-fit: contain; /* Сохраняем пропорции логотипа */
+  width: 140px;
+  height: 140px;
+  margin-bottom: 30px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
 h1 {
   color: #000000;
-  margin-bottom: 15px;
-  font-size: 32px;
+  margin-bottom: 20px;
+  font-size: 36px;
   font-weight: bold;
   text-decoration: underline;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 h4 {
   color: #000000;
-  margin-bottom: 30px;
-  font-size: 18px;
+  margin-bottom: 35px;
+  font-size: 20px;
   font-weight: normal;
+  line-height: 1.4;
 }
 
 h5 {
   color: #000000;
-  margin: 25px 0 15px 0;
-  font-size: 16px;
+  margin: 30px 0 20px 0;
+  font-size: 18px;
   font-weight: normal;
   font-style: italic;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
 }
 
 label {
   text-align: left;
   color: #000000;
   font-weight: bold;
-  margin-bottom: 8px;
-  font-size: 16px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 input {
-  padding: 12px 15px;
-  border: 2px solid #000000;
-  border-radius: 4px;
-  font-size: 16px;
+  padding: 15px 20px;
+  border: 3px solid #000000;
+  border-radius: 6px;
+  font-size: 18px;
   font-family: 'Times New Roman', Times, serif;
   background-color: #FFFFFF;
   color: #000000;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
   width: 100%;
   box-sizing: border-box;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 input:focus {
   outline: none;
-  border-color: #00FA9A; /* Акцентный цвет для фокуса */
-  box-shadow: 0 0 0 2px rgba(0, 250, 154, 0.3);
+  border-color: #00FA9A;
+  box-shadow: 0 0 0 4px rgba(0, 250, 154, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 input::placeholder {
   color: #666666;
   font-style: italic;
+  font-size: 16px;
 }
 
 button[type="submit"] {
-  background-color: #00FA9A; /* Акцентный цвет для основной кнопки */
+  background: linear-gradient(145deg, #00FA9A, #00E68A);
   color: #000000;
-  padding: 14px;
-  border: 2px solid #000000;
-  border-radius: 4px;
-  font-size: 18px;
-  font-weight: bold;
-  font-family: 'Times New Roman', Times, serif;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 15px;
-}
-
-button[type="submit"]:hover {
-  background-color: #00E68A; /* Темнее на hover */
-}
-
-button[type="submit"]:active {
-  background-color: #00D47A; /* Еще темнее на active */
-}
-
-.guest-button {
-  background-color: #FFFFFF;
-  color: #000000;
-  padding: 12px 24px;
-  border: 2px solid #000000;
-  border-radius: 4px;
-  font-size: 16px;
+  padding: 16px;
+  border: 3px solid #000000;
+  border-radius: 6px;
+  font-size: 20px;
   font-weight: bold;
   font-family: 'Times New Roman', Times, serif;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(145deg, #00E68A, #00D47A);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+button[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.guest-button {
+  background: linear-gradient(145deg, #FFFFFF, #F0F0F0);
+  color: #000000;
+  padding: 14px 28px;
+  border: 3px solid #000000;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .guest-button:hover {
-  background-color: #00FA9A; /* Акцентный цвет на hover */
+  background: linear-gradient(145deg, #00FA9A, #00E68A);
   color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.guest-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 /* Состояния для ошибок */
 .input-error {
   border-color: #FF0000;
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
 }
 
 .error-message {
   color: #FF0000;
-  font-size: 14px;
-  margin-top: 5px;
+  font-size: 16px;
+  margin-top: 8px;
   text-align: left;
   font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(255, 0, 0, 0.1);
 }
 
 /* Анимация появления */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-30px) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 .login-form {
-  animation: fadeIn 0.5s ease-out;
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Эффект параллакса для фона */
+.login-container {
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 /* Адаптивность для мобильных устройств */
 @media (max-width: 480px) {
   .login-form {
-    padding: 30px 20px;
+    padding: 35px 25px;
     margin: 0 15px;
+    border-width: 2px;
   }
   
   h1 {
-    font-size: 28px;
+    font-size: 30px;
   }
   
   h4 {
-    font-size: 16px;
+    font-size: 18px;
   }
   
   .logo {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
+  }
+  
+  input {
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+  
+  button[type="submit"] {
+    padding: 14px;
+    font-size: 18px;
+  }
+  
+  .guest-button {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+}
+
+/* Плавная прокрутка */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Улучшенная читаемость текста */
+.login-form {
+  line-height: 1.6;
+}
+
+/* Эффект свечения для фокуса */
+input:focus {
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 0 3px rgba(0, 250, 154, 0.4);
+  }
+  to {
+    box-shadow: 0 0 0 6px rgba(0, 250, 154, 0.2);
   }
 }
 
