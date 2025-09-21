@@ -157,3 +157,78 @@ INSERT INTO orders (order_number, article, order_date, delivery_date, pickup_add
 (8, 'F572H7, 5, D329H3, 4', '2025-03-31', '2025-04-27', 19, 'Одинцов Серафим Артёмович', 908, 'Новый', (SELECT id FROM employees WHERE fullname = 'Одинцов Серафим Артёмович')),
 (9, 'B320R5, 5, G432E4, 1', '2025-04-02', '2025-04-28', 5, 'Степанов Михаил Артёмович', 909, 'Новый', (SELECT id FROM employees WHERE fullname = 'Степанов Михаил Артёмович')),
 (10, 'S213E3, 5, E482R4, 5', '2025-04-03', '2025-04-29', 19, 'Степанов Михаил Артёмович', 910, 'Новый', (SELECT id FROM employees WHERE fullname = 'Степанов Михаил Артёмович'));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Создание таблицы ролей
+CREATE TABLE Roles (
+    role_id SERIAL PRIMARY KEY,
+    role_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Создание таблицы пользователей
+CREATE TABLE Users (
+    user_id SERIAL PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    role_id INTEGER NOT NULL,
+    CONSTRAINT fk_role
+        FOREIGN KEY (role_id) 
+        REFERENCES Roles(role_id)
+        ON DELETE CASCADE
+);
+
+-- Создание таблицы данных авторизации
+CREATE TABLE AuthData (
+    auth_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    login VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    CONSTRAINT fk_user
+        FOREIGN KEY (user_id) 
+        REFERENCES Users(user_id)
+        ON DELETE CASCADE
+);
+
+-- Вставка данных
+INSERT INTO Roles (role_name) VALUES
+('Администратор'),
+('Менеджер'),
+('Авторизированный клиент');
+
+INSERT INTO Users (full_name, role_id) VALUES
+('Никифорова Весения Николаевна', 1),
+('Сазонов Руслан Германович', 1),
+('Одинцов Серафим Артёмович', 1),
+('Степанов Михаил Артёмович', 2),
+('Ворсин Петр Евгеньевич', 2),
+('Старикова Елена Павловна', 2),
+('Михайлюк Анна Вячеславовна', 3),
+('Ситдикова Елена Анатольевна', 3);
+
+INSERT INTO AuthData (user_id, login, password) VALUES
+(1, '94d5ous@gmail.com', 'uzWC67'),
+(2, 'uth4iz@mail.com', '2L6KZG'),
+(3, 'yzls62@outlook.com', 'JlFRCZ'),
+(4, '1diph5e@tutanota.com', '8ntwUp'),
+(5, 'tjde7c@yahoo.com', 'YOyhfR'),
+(6, 'wpmrc3do@tutanota.com', 'RSbvHv'),
+(7, '5d4zbu@tutanota.com', 'rwVDh9'),
+(8, 'ptec8ym@yahoo.com', 'LdNyos'),
+(5, '1qz4kw@mail.com', 'gynQMT'),
+(6, '4np6se@mail.com', 'AtnDjr');
